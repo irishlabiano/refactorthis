@@ -64,20 +64,9 @@ namespace RefactorThis.Domain
                 return response;
             }
 
-            InvoiceTypeFactory factory = null;
+           
 
-            switch (invoice.Type)
-            {
-                case Enums.InvoiceType.Standard:
-                    factory = new StandardInvoiceFactory();
-                    break;
-
-                case Enums.InvoiceType.Commercial:
-                    factory = new CommercialInvoiceFactory();
-                    break;
-            }
-
-            var handler = FactoryHandler.CreateHandler(invoice.Type);
+            var factory = FactoryHandler.CreateHandler(invoice.Type);
            
             var responseMessage = factory.CalculatePayment(invoice, payment);
 
